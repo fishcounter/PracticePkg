@@ -11,7 +11,7 @@ Description: This package is simplifies retrieving data for a specified year (or
 	US National Highway Traffic Safety Administration's Fatality Analysis Reporting System (FARS).  It allows 
 	data retrieval and summarization to total reported accident counts by month and year.  A function to plot 
 	accident locations for a specified state and year is also provided.
-License: GPL (>3.1.0)`
+License: GPL-2
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
