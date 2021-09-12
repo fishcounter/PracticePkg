@@ -4,7 +4,9 @@
 
 <!-- badges: start -->
 [![Travis build status](https://travis-ci.com/fishcounter/PracticePkg.svg?branch=main)](https://travis-ci.com/fishcounter/PracticePkg)
+[![R-CMD-check](https://github.com/fishcounter/PracticePkg/workflows/R-CMD-check/badge.svg)](https://github.com/fishcounter/PracticePkg/actions)[![Travis build status](https://travis-ci.com/fishcounter/PracticePkg.svg?branch=main)](https://travis-ci.com/fishcounter/PracticePkg)
 [![R-CMD-check](https://github.com/fishcounter/PracticePkg/workflows/R-CMD-check/badge.svg)](https://github.com/fishcounter/PracticePkg/actions)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/fishcounter/PracticePkg?branch=main&svg=true)](https://ci.appveyor.com/project/fishcounter/PracticePkg)
 <!-- badges: end -->
 
 
