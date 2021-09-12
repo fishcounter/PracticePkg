@@ -1,8 +1,12 @@
 
 # PracticePkg
 
+
 <!-- badges: start -->
+[![Travis build status](https://travis-ci.com/fishcounter/PracticePkg.svg?branch=main)](https://travis-ci.com/fishcounter/PracticePkg)
+[![R-CMD-check](https://github.com/fishcounter/PracticePkg/workflows/R-CMD-check/badge.svg)](https://github.com/fishcounter/PracticePkg/actions)
 <!-- badges: end -->
+
 
 The goal of PracticePkg is to learn how to create an R package.
 
