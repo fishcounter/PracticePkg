@@ -4,7 +4,7 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of PracticePkg is to ...
+The goal of PracticePkg is to learn how to create an R package.
 
 ## Installation
 
