@@ -1,0 +1,57 @@
+---
+title: "fars_functions"
+author: "R. Townsend"
+date: "2021-09-11"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{fars_functions_details}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(PracticePkg)
+library(readr)
+library(dplyr)
+```
+The functions in the fars_function package will assist you in querying the **US National Highway Traffic Safety Administration's Fatality Analysis Reporting System ** (*FARS*) for annual reported accidents, summarize them by month and year, and plot teh accident sites for a selected state and year.
+
+Individual files can be read in by using 
+
+```{r, eval=FALSE}
+fars_read( year = "accident_2013.csv.bz2")
+```
+which is a bz2 compressed file from the FARS database for 2013.  
+
+
+This is a bit unwieldy for querying multiple years, so the function **make_file** is used to create appropriate file name(s) based on the requested year(s) for the more advanced functions:
+
+```{r, eval=FALSE}
+make_filename(2013:2015)
+```
+
+**fars_read_years** queries multiple *years* using fars_read_years returns a tibble with the month and year of each reported accident.
+```{r, eval=FALSE}
+fars_read_years( years = 2013:2015)
+```
+
+
+Summarization of annual reported accident counts into one month-by-year tibble is performed by the **fars_summarize_years** function. 
+
+```{r, eval=FALSE}
+fars_summarize_years( years = 2013:2015)
+```
+
+For a plot of annual accidents reported for a selected state, use the **fars_map_state** function.
+```{r, eval=FALSE}
+fars_map_state( state.num = 16, year = 2013)
+```
+
+

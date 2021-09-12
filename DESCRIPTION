@@ -1,20 +1,30 @@
 Package: PracticePkg
-Title: What the Package Does (One Line, Title Case)
+Title: FARS functions to summarize FARS data by month, year
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Rich",
+           family = "Townsend",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
+           email = "rich@uw.edu",
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+Description: This package is simplifies retrieving data for a specified year (or years)  from  the
+	US National Highway Traffic Safety Administration's Fatality Analysis Reporting System (FARS).  It allows 
+	data retrieval and summarization to total reported accident counts by month and year.  A function to plot 
+	accident locations for a specified state and year is also provided.
+License: GPL (>3.1.0)`
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    testthat (>= 3.0.0)
+Imports:
+	dplyr,
+	magrittr,
+	maps,
+	readr,
+	tidyr
 VignetteBuilder: knitr
+Config/testthat/edition: 3

@@ -1,16 +1,16 @@
 #' **fars_read**
 #'
-#' This function reads in data using the readr package. *Requires the **readr** package*
+#' This function reads in data using the readr package. *Requires the readr package*
 #' or the function will fail.
 #'
 #' @importFrom readr read_csv
 #' @importFrom dplyr tbl_df
 #'
-#' @param *filename*  full name of the file containing data to be imported into R session
+#' @param filename  full name of the file containing data to be imported into R session
 #'
 #' @return Returns a data.frame object of the class tbl_df (also known as a *tibble*--
 #' the structure central data of  tidyverse packages.  If the file is not located, will return an error
-#' stating that *filename* does not exist.
+#' stating that filename does not exist.
 #'
 #' @note a vector of multiple filenames can be queried.  Output combines files into one tibble.
 #'
@@ -22,8 +22,8 @@
 #'
 #' @export
 fars_read <- function(filename) {
-        if(!file.exists(filename))
-                stop("file '", filename, "' does not exist")
+        if(!file.exists(filename)){
+                stop(paste(c("file ", filename, " does not exist"),collapse=""))}
         data <- suppressMessages({
                 readr::read_csv(filename, progress = FALSE)
         })
@@ -36,14 +36,15 @@ fars_read <- function(filename) {
 #'
 #' Simple function to create a filename of a compressed csv FARS file for a specified year, with a .bz2 extension.
 #'
-#' @param *year*  a 4-digit numeric number for a specied data year from US National Highway Traffic Safety Administration's
+#' @param year  a 4-digit numeric number for a specied data year from US National Highway Traffic Safety Administration's
 #' Fatality Analysis Reporting System
 #'
 #' @return outputs a character value of "accident_*year*.csv.bz2"
 #'
 #' @examples
-#' make.filename(2013)
-#' outputs "accident_2013.csv.bz2"
+#' \dontrun{
+#' make.filename(2013)  # outputs "accident_2013.csv.bz2"
+#' }
 #'
 #' @export
 make_filename <- function(year) {
@@ -56,9 +57,9 @@ make_filename <- function(year) {
 #' **fars_read_years**
 #'
 #' Function to read compressed FARS csv files for a range of years and provides a month (1-12) and 4-digit year for each line item
-#' included in each file.  *Requires **mutate** and **select** from the dplyr package*
+#' included in each file.  *Requires mutate and select from the dplyr package*
 #'
-#' @param *years*  vector of 4-digit numeric numbers for a specied data years from US National Highway Traffic
+#' @param years  vector of 4-digit numeric numbers for a specied data years from US National Highway Traffic
 #' Safety Administration'sFatality Analysis Reporting System
 #'
 #' @return if the file exists, creates a list consisting of a 2-column tibble for each queried year, with month (1-12)
@@ -72,6 +73,7 @@ make_filename <- function(year) {
 #'
 #' @export
 fars_read_years <- function(years) {
+        MONTH <- NULL # line req'd to bind var locally
         lapply(years, function(year) {
                 file <- make_filename(year)
                 tryCatch({
@@ -89,16 +91,16 @@ fars_read_years <- function(years) {
 #'
 #' **fars_summarize_years**
 #'
-#' Function to summarize results from *fars_read_years* function.  *Requires **group_by** and **summarize** from dplyr* and
-#' *Requires **group_by** and **summarize** from dplyr* and spread from **tidyr** packages*
-#'
+#' Function to summarize results from *fars_read_years* function.  *Requires group_by and summarize from dplyr and*
+#' *Requires group_by and summarize from dplyr and spread from tidyr packages.*
+#'a
 #' @importFrom dplyr group_by summarize
 #'
 #' @importFrom tidyr spread
 #'
 #' @importFrom magrittr "%>%"
 #'
-#' @param *years*  a numeric vector of 4-digit numbers for specified data years from US National Highway Traffic
+#' @param years  a numeric vector of 4-digit numbers for specified data years from US National Highway Traffic
 #' Safety Administration'sFatality Analysis Reporting System
 #'
 #' @return Creates a tibble summarizing the total number of accidents reported by month and year
@@ -110,6 +112,7 @@ fars_read_years <- function(years) {
 #'
 #' @export
 fars_summarize_years <- function(years) {
+        year <- MONTH <- n <- NULL # line req'd to bind var locally
         dat_list <- fars_read_years(years)
         dplyr::bind_rows(dat_list) %>%
                 dplyr::group_by(year, MONTH) %>%
@@ -121,8 +124,8 @@ fars_summarize_years <- function(years) {
 #'
 #' **fars_map_state**
 #'
-#' Function to plot fatality locations for a specified year and state. *Requires **map** from maps, **points** from graphics,
-#' and **filter** from dplyr packages*.
+#' Function to plot fatality locations for a specified year and state. *Requires map from maps, points from graphics,*
+#' *and filter from dply packages*.
 #'
 #' @importFrom maps map
 #'
@@ -130,10 +133,10 @@ fars_summarize_years <- function(years) {
 #'
 #' @importFrom dplyr filter
 #'
-#' @param *state.num*  number representing a US state as coded by the US National Highway Traffic
+#' @param state.num  number representing a US state as coded by the US National Highway Traffic
 #' Safety Administration'sFatality Analysis Reporting System
 #'
-#' @param *year*  vector of 4-digit numeric numbers for a specied data years from US National Highway Traffic
+#' @param year  vector of 4-digit numeric numbers for a specied data years from US National Highway Traffic
 #' Safety Administration's Fatality Analysis Reporting System
 #'
 #' @return if data is available for the queried state and year, opens a  plot window showing the state outline
@@ -141,12 +144,13 @@ fars_summarize_years <- function(years) {
 #'
 #' @examples
 #' \dontrun{
-#' fars_map_state(16, 2013)
+#' fars_map_state(16, 2013) # where 16=Idaho and 2013 is the queried year
 #' }
-#'  where 16=Idaho and 2013 is the queried year
+#'
 #'
 #' @export
 fars_map_state <- function(state.num, year) {
+		STATE <- NULL # line req'd to bind var locally
         filename <- make_filename(year)
         data <- fars_read(filename)
         state.num <- as.integer(state.num)
